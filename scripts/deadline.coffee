@@ -10,10 +10,20 @@
 
 moment = require 'moment'
 
+format = (ms) ->
+  day = 24*60*60*1000
+  if ms < day
+    moment.duration(ms).humanize()
+  else
+    days = Math.floor(ms / day)
+    if days == 1 then "a day" else "#{days} days"
+
 module.exports = (robot) ->
   config = require('hubot-conf')('deadline', robot)
 
   robot.respond /deadline/i, (res) ->
     name = config 'name'
-    time = moment(config 'time')
-    res.send "#{name} #{time.fromNow()}"
+    diff = moment(config 'time').diff(moment())
+    prefix = if diff >= 0 then 'in ' else ''
+    suffix = if diff < 0 then ' ago' else ''
+    res.send "#{name} #{prefix}#{format diff}#{suffix}"
