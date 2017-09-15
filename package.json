@@ -13,7 +13,8 @@
     "hubot-help": "^0.2.2",
     "hubot-redis-brain": "0.0.3",
     "hubot-shortcut": "^1.0.5",
-    "hubot-slack": "^4.3.4"
+    "hubot-slack": "^4.3.4",
+    "moment": "^2.18.1"
   },
   "engines": {
     "node": "0.10.x"
